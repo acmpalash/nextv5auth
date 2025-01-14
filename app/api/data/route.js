@@ -1,7 +1,9 @@
 // app/api/data/route.js
 import { auth } from "@clerk/nextjs";
-import dbConnect from "@/utils/dbConnect"; // Adjust path to your `dbConnect` utility
-import User from "@/models/user.model"; // Adjust path to your `user.model.js`
+import { connect } from "@/db";
+// import connect from "@/utils/connect"; // Adjust path to your `connect` utility
+// import User from "@/models/user.model"; // Adjust path to your `user.model.js`
+import User from '@/modals/user.model';
 
 export async function GET(req) {
   try {
@@ -15,7 +17,7 @@ export async function GET(req) {
     }
 
     // Connect to the database
-    await dbConnect();
+    await connect();
 
     // Fetch user data from MongoDB
     const users = await User.find().lean();
@@ -46,7 +48,7 @@ export async function POST(req) {
     const body = await req.json();
 
     // Connect to the database
-    await dbConnect();
+    await connect();
 
     // Create a new user in MongoDB
     const newUser = await User.create(body);

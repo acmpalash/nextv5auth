@@ -1,6 +1,6 @@
 'use client'
 import React from 'react'
-import { currentUser } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs';
 import { UserProfile, useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
