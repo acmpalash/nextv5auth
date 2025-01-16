@@ -2,7 +2,7 @@ import { Schema, model, models } from 'mongoose';
 import { unique } from 'next/dist/build/utils';
 
 const UserSchema = new Schema({
-    cleakId:{
+    clerkId:{
         type:String,
         required:true,
         unique: true,
@@ -27,6 +27,6 @@ const UserSchema = new Schema({
     },
 });
 
-const User = models?.User || model("User", UserSchema);
+const User = models.User || model("User", UserSchema);
 
 export default User;

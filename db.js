@@ -20,7 +20,7 @@ export const connect = async ()=> {
         bufferCommands: false,
         connectTimeoutMS: 30000,
     });
-    cached.comm = await cached.promise;
+    cached.conn = await cached.promise;
 
     return cached.conn;
 };

@@ -1,8 +1,6 @@
 // app/api/data/route.js
 import { auth } from "@clerk/nextjs";
-import { connect } from "@/db";
-// import connect from "@/utils/connect"; // Adjust path to your `connect` utility
-// import User from "@/models/user.model"; // Adjust path to your `user.model.js`
+import { connect } from '@/db/';
 import User from '@/models/user.model';
 
 export async function GET(req) {
