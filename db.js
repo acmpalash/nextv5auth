@@ -15,8 +15,7 @@ export const connect = async ()=> {
     if(cached.conn) return cached.conn;
 
     cached.promise = 
-    cached.promise || mongoose.connect(MONGODB_URL, {
-        dbName: "nextv5auth",
+    cached.promise || mongoose.connect(MONGODB_URL, {        
         bufferCommands: false,
         connectTimeoutMS: 30000,
     });
