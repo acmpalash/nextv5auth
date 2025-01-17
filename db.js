@@ -1,4 +1,4 @@
-import mongoose, {Mongoose} from "mongoose";
+const mongoose = require("mongoose");
 
 const MONGODB_URL=process.env.MONGODB_URL;
 
@@ -24,3 +24,4 @@ export const connect = async ()=> {
 
     return cached.conn;
 };
+module.exports = { connect }

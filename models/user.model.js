@@ -1,5 +1,5 @@
-import { Schema, model, models } from 'mongoose';
-import { unique } from 'next/dist/build/utils';
+
+const { Schema, model, models } = require('mongoose');
 
 const UserSchema = new Schema({
     clerkId:{
@@ -29,4 +29,4 @@ const UserSchema = new Schema({
 
 const User = models.User || model("User", UserSchema);
 
-export default User;
+module.exports = User;

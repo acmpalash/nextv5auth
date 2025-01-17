@@ -1,4 +1,4 @@
-// app/api/data/route.js
+
 import { auth } from "@clerk/nextjs";
 import { connect } from "@/db";
 import User from "@/models/user.model";
