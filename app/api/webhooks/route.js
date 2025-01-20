@@ -71,7 +71,7 @@ export async function POST(req) {
         
     } catch (error) {
         console.log('Error Creating or Updating User:',error)
-        return new Response('Error Occured',{
+        return new Response('Error Occurred',{
             status: 400,
         });
     }
@@ -86,7 +86,7 @@ export async function POST(req) {
         
     } catch (error) {
         console.log('Error Deleting User:',error)
-        return new Response('Error Occured',{
+        return new Response('Error Occurred',{
             status: 400,
         });
   }
