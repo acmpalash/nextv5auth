@@ -1,19 +1,16 @@
-import { Webhook } from 'svix'
-import { headers } from 'next/headers'
-import { createOrUpdateUser, deleteUser } from '.././lib/actions/user'
+import { Webhook } from 'svix';
+import { headers } from 'next/headers';
+import { createOrUpdateUser, deleteUser } from '@/lib/actions/user';
 
 
 export async function POST(req) {
-  const SIGNING_SECRET = process.env.SIGNING_SECRET
+  const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
 
-  if (!SIGNING_SECRET) {
-    throw new Error('Error: Please add SIGNING_SECRET from Clerk Dashboard to .env or .env.local')
+  if (!WEBHOOK_SECRET) {
+    throw new Error('Error: Please add WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local')
   }
 
-  // Create new Svix instance with secret
-  const wh = new Webhook(SIGNING_SECRET)
-
-  // Get headers
+    // Get headers
   const headerPayload = await headers()
   const svix_id = headerPayload.get('svix-id')
   const svix_timestamp = headerPayload.get('svix-timestamp')
@@ -29,6 +26,10 @@ export async function POST(req) {
   // Get body
   const payload = await req.json()
   const body = JSON.stringify(payload)
+
+  // Create new Svix instance with secret
+  const wh = new Webhook(WEBHOOK_SECRET)
+
 
   let evt
 
@@ -54,7 +55,7 @@ export async function POST(req) {
   console.log('Webhook payload:', body)
 
   if(eventType === 'user.created' || eventType === 'user.updated'){
-    const {id, username, first_name, last_name, image_url, email_addresses } = eve?.data;
+    const {id, username, first_name, last_name, image_url, email_addresses } = evt?.data;
     try {
         await createOrUpdateUser(
             id,
@@ -76,7 +77,7 @@ export async function POST(req) {
     }
   }
   if(eventType === 'user.deleted'){
-    const {id} = eve.data;
+    const {id} = evt?.data;
     try {
         await deleteUser(id);
         return new Response('User is Deleted',{
