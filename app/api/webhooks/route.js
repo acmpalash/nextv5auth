@@ -1,7 +1,6 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
-import { createOrUpdateUser, deleteUser } from '@/lib/actions/user';
-
+import { createOrUpdateUser, deleteUser } from '/../lib/actions/user';
 
 export async function POST(req) {
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET
@@ -11,7 +10,7 @@ export async function POST(req) {
   }
 
     // Get headers
-  const headerPayload = await headers()
+  const headerPayload = headers()
   const svix_id = headerPayload.get('svix-id')
   const svix_timestamp = headerPayload.get('svix-timestamp')
   const svix_signature = headerPayload.get('svix-signature')
@@ -31,7 +30,7 @@ export async function POST(req) {
   const wh = new Webhook(WEBHOOK_SECRET)
 
 
-  let evt
+  let evt;
 
   // Verify payload with headers
   try {
@@ -57,7 +56,7 @@ export async function POST(req) {
   if(eventType === 'user.created' || eventType === 'user.updated'){
     const {id, username, first_name, last_name, image_url, email_addresses } = evt?.data;
     try {
-        await createOrUpdateUser(
+        await createOrUpdateUser (
             id,
             first_name,
             last_name,
